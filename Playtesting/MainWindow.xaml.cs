@@ -21,18 +21,42 @@ namespace Playtesting
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Controller? controller;
+
         public MainWindow()
         {
             InitializeComponent();
             LoadButton.Click += (_, _) =>
             {
-                var fileDialog = new OpenFileDialog()
+                var fileDialog = new OpenFileDialog
                 {
-                    DefaultExt = ".csv",
-                    Filter = "teszt adatok (.csv) | *.csv",
+                    Filter = "minden támogatott fájl |*.csv;*.json|szöveges adatok |*.csv|JSON export fájl|*.json|Minden fájl |*.*",
                     Multiselect = false,
-                    Title = ""
+                    Title = "Forrás betöltése"
                 };
+                fileDialog.FileOk += (_, _) =>
+                {
+                    controller = fileDialog.SafeFileName.EndsWith(".json")
+                        ? FileReader.ReadFromJson(fileDialog.OpenFile())
+                        : FileReader.ReadFromCsv(fileDialog.OpenFile());
+                    SaveButton.IsEnabled = true;
+                    controller.SetBindingTo(Grid);
+                };
+                fileDialog.ShowDialog();
+            };
+            SaveButton.Click += (_, _) =>
+            {
+                var fileDialog = new SaveFileDialog
+                {
+                    Filter = "minden támogatott fájl |*.csv;*.json|szöveges adatok |*.csv|JSON export fájl | *.json|Minden fájl |*.*",
+                    Title = "Mentés"
+                };
+                fileDialog.FileOk += (_, _) =>
+                {
+                    controller!.SaveToJson(fileDialog.OpenFile());
+                    MessageBox.Show("Fájl elmentve!");
+                };
+                fileDialog.ShowDialog();
             };
         }
     }

@@ -5,10 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Playtesting"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="1000">
     <Grid>
-        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,180,0"/>
-        <Button Content="Betöltés" HorizontalAlignment="Left" Margin="667,153,0,0" VerticalAlignment="Top" Width="86" x:Name="LoadButton"/>
-        <Button Content="Mentés" HorizontalAlignment="Left" Margin="667,263,0,0" VerticalAlignment="Top" Width="86"/>
+        <DataGrid Margin="10,10,180,10" x:Name="Grid" ItemsSource="{Binding}" AutoGenerateColumns="false">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Név" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Kor" Binding="{Binding Age}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Verzió" Binding="{Binding Version}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Játékidő (h)" Binding="{Binding Playtime}"></DataGridTextColumn>
+                <DataGridTextColumn Header="HW Szint" Binding="{Binding HwTier}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Teljesítmény" Binding="{Binding PerformanceScore}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Játékmenet" Binding="{Binding GameplayScore}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Történet" Binding="{Binding StoryScore}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Látvány" Binding="{Binding VisualsScore}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Zene" Binding="{Binding MusicScore}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Betöltés" HorizontalAlignment="Left" Margin="859,154,0,0" VerticalAlignment="Top" Width="86" x:Name="LoadButton"/>
+        <Button Content="Mentés" HorizontalAlignment="Left" Margin="859,272,0,0" VerticalAlignment="Top" Width="86" x:Name="SaveButton" IsEnabled="false"/>
     </Grid>
 </Window>
