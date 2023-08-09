@@ -36,11 +36,14 @@ namespace Playtesting
                 };
                 fileDialog.FileOk += (_, _) =>
                 {
-                    controller = fileDialog.SafeFileName.EndsWith(".json")
+                    var isFileJson = fileDialog.SafeFileName.EndsWith(".json");
+                    controller = isFileJson
                         ? FileReader.ReadFromJson(fileDialog.OpenFile())
                         : FileReader.ReadFromCsv(fileDialog.OpenFile());
                     SaveButton.IsEnabled = true;
-                    controller.SetBindingTo(Grid);
+                    DeleteButton.IsEnabled = true;
+                    NewTesterButton.IsEnabled = true;
+                    controller.SetBindingFor(Grid);
                 };
                 fileDialog.ShowDialog();
             };
@@ -48,7 +51,7 @@ namespace Playtesting
             {
                 var fileDialog = new SaveFileDialog
                 {
-                    Filter = "minden támogatott fájl |*.csv;*.json|szöveges adatok |*.csv|JSON export fájl | *.json|Minden fájl |*.*",
+                    Filter = "minden támogatott fájl |*.csv;*.json|szöveges adatok |*.csv|JSON export fájl |*.json|Minden fájl |*.*",
                     Title = "Mentés"
                 };
                 fileDialog.FileOk += (_, _) =>
@@ -57,6 +60,29 @@ namespace Playtesting
                     MessageBox.Show("Fájl elmentve!");
                 };
                 fileDialog.ShowDialog();
+            };
+            DeleteButton.Click += (_, _) =>
+            {
+                var answer = MessageBox.Show("Biztosan törli ezt a sort?", "Törlés", MessageBoxButton.YesNo, MessageBoxImage.Warning,
+                    MessageBoxResult.No);
+                if (answer is MessageBoxResult.No) return;
+                if (Grid.SelectedItem is not Tester selected)
+                {
+                    MessageBox.Show("Nincs sor kijelölve!", "Hiba!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                var success = controller!.DeleteTester(selected);
+                if (success)
+                {
+                    MessageBox.Show("Sor törölve!", "Sikeres törlés!", MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                    controller!.SetBindingFor(Grid);
+                }
+                else MessageBox.Show("Valamilyen hiba történt a törlés során.", "Hiba!", MessageBoxButton.OK, MessageBoxImage.Error);
+            };
+            NewTesterButton.Click += (_, _) =>
+            {
+                new NewTesterWindow(controller!).ShowDialog();
             };
         }
     }

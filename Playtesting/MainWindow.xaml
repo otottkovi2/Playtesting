@@ -7,12 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="1000">
     <Grid>
-        <DataGrid Margin="10,10,180,10" x:Name="Grid" ItemsSource="{Binding}" AutoGenerateColumns="false">
+        <DataGrid Margin="10,10,180,10" x:Name="Grid" ItemsSource="{Binding}" AutoGenerateColumns="false"
+                  CanUserAddRows="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Név" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Név" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
                 <DataGridTextColumn Header="Kor" Binding="{Binding Age}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Verzió" Binding="{Binding Version}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Játékidő (h)" Binding="{Binding Playtime}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Játékidő (óra)" Binding="{Binding Playtime}"></DataGridTextColumn>
                 <DataGridTextColumn Header="HW Szint" Binding="{Binding HwTier}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Teljesítmény" Binding="{Binding PerformanceScore}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Játékmenet" Binding="{Binding GameplayScore}"></DataGridTextColumn>
@@ -21,7 +22,11 @@
                 <DataGridTextColumn Header="Zene" Binding="{Binding MusicScore}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Betöltés" HorizontalAlignment="Left" Margin="859,154,0,0" VerticalAlignment="Top" Width="86" x:Name="LoadButton"/>
-        <Button Content="Mentés" HorizontalAlignment="Left" Margin="859,272,0,0" VerticalAlignment="Top" Width="86" x:Name="SaveButton" IsEnabled="false"/>
+        <Button Content="Betöltés" HorizontalAlignment="Right" Margin="0,154,43,0" VerticalAlignment="Top" Width="86" x:Name="LoadButton"/>
+        <Button Content="Mentés" HorizontalAlignment="Right" Margin="0,272,43,0" VerticalAlignment="Top" Width="86" x:Name="SaveButton" IsEnabled="false"/>
+        <Button Content="Sor törlése" Width="86" Margin="0,341,43,0" HorizontalAlignment="Right" VerticalAlignment="Top"
+                IsEnabled="False" x:Name="DeleteButton">
+        </Button>
+        <Button Content="Új sor..." Margin="0,391,43,0" Width="86" VerticalAlignment="Top" HorizontalAlignment="Right" Height="21" x:Name="NewTesterButton" IsEnabled="False"></Button>
     </Grid>
 </Window>

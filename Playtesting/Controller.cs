@@ -8,32 +8,43 @@ namespace Playtesting
 {
     public class Controller
     {
-        private readonly List<Tester> testers;
-        public List<Tester> Testers => testers;
+        public List<Tester> Testers { get; }
 
         public Controller(List<Tester> testers)
         {
-            this.testers = testers;
+            Testers = testers;
         }
 
         public void SaveToJson(Stream stream)
         {
-            FileWriter.SaveToJson(stream,testers);
+            FileWriter.SaveToJson(stream, Testers);
         }
 
         public void SaveToCsv(Stream stream)
         {
-            FileWriter.SaveToCsv(stream,testers);
+            FileWriter.SaveToCsv(stream, Testers);
         }
 
-        public void SetBindingTo(ItemsControl control)
+        public void SetBindingFor(ItemsControl control)
         {
+            control.ClearValue(ItemsControl.ItemsSourceProperty);
             var binding = new Binding("Testers")
             {
                 Mode = BindingMode.OneWay,
+                ValidationRules = { new ScoreRule(),new ExceptionValidationRule(),new NotifyDataErrorValidationRule()},
                 Source = this
             };
             control.SetBinding(ItemsControl.ItemsSourceProperty, binding);
+        }
+
+        public bool DeleteTester(Tester item)
+        {
+            return Testers.Remove(item);
+        }
+
+        public void AddTester(Tester item)
+        {
+            Testers.Add(item);
         }
     }
 }

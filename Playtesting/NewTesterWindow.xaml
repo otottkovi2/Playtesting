@@ -1,0 +1,61 @@
+﻿<Window x:Class="Playtesting.NewTesterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Playtesting"
+        mc:Ignorable="d"
+        Title="NewTesterWindow" Height="600" Width="450">
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+            <Setter Property="Margin" Value="0,0,0,0"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <StackPanel Margin="10" Orientation="Vertical" Width="400">
+            <StackPanel Margin="10" Orientation="Horizontal" >
+                <Label Content="Név:" ></Label>
+                <TextBox Width="100" Height="20" x:Name="NameField"/>
+            </StackPanel>
+            <StackPanel Margin="10" Orientation="Horizontal" >
+                <Label Content="Kor:" ></Label>
+                <TextBox Width="100" Height="20" x:Name="AgeField"></TextBox>
+            </StackPanel>
+            <StackPanel Margin="10" Orientation="Horizontal" >
+                <Label Content="Verzió:" ></Label>
+                <TextBox Width="100" Height="20" x:Name="VersionField"></TextBox>
+            </StackPanel>
+            <StackPanel Margin="10" Orientation="Horizontal" >
+                <Label Content="Játékidő (óra):" ></Label>
+                <TextBox Width="100" Height="20" x:Name="TimeField"></TextBox>
+            </StackPanel>
+            <StackPanel Margin="10" Orientation="Horizontal" >
+                <Label Content="Hardware szint (1-10):" ></Label>
+                <TextBox Width="100" Height="20" x:Name="HwField"></TextBox>
+            </StackPanel>
+            <StackPanel Margin="10" Orientation="Horizontal" >
+                <Label Content="Teljesítmény pontszám (1-10):" ></Label>
+                <TextBox Width="100" Height="20" x:Name="PerfField"></TextBox>
+            </StackPanel>
+            <StackPanel Margin="10" Orientation="Horizontal" >
+                <Label Content="Játékmenet pontszám (1-10):" ></Label>
+                <TextBox Width="100" Height="20" x:Name="GameplayField"></TextBox>
+            </StackPanel>
+            <StackPanel Margin="10" Orientation="Horizontal" >
+                <Label Content="Történet pontszám (1-10):" ></Label>
+                <TextBox Width="100" Height="20" x:Name="StoryField"></TextBox>
+            </StackPanel>
+            <StackPanel Margin="10" Orientation="Horizontal" >
+                <Label Content="Látványvilág pontszám (1-10):" ></Label>
+                <TextBox Width="100" Height="20" x:Name="VisualsField"></TextBox>
+            </StackPanel>
+            <StackPanel Margin="10" Orientation="Horizontal" >
+                <Label Content="Zene pontszám (1-10):" ></Label>
+                <TextBox Width="100" Height="20" x:Name="MusicField"></TextBox>
+            </StackPanel>
+            <Button Content="Hozzáadás" Width="100" Margin="0,50" x:Name="AddButton"></Button>
+        </StackPanel>
+    </Grid>
+</Window>
