@@ -30,7 +30,8 @@ namespace Playtesting
             {
                 var fileDialog = new OpenFileDialog
                 {
-                    Filter = "minden támogatott fájl |*.csv;*.json|szöveges adatok |*.csv|JSON export fájl|*.json|Minden fájl |*.*",
+                    Filter = "minden támogatott fájl |*.csv;*.json|szöveges adatok |*.csv|JSON export fájl|*.json|" +
+                             "Minden fájl |*.*",
                     Multiselect = false,
                     Title = "Forrás betöltése"
                 };
@@ -51,19 +52,23 @@ namespace Playtesting
             {
                 var fileDialog = new SaveFileDialog
                 {
-                    Filter = "minden támogatott fájl |*.csv;*.json|szöveges adatok |*.csv|JSON export fájl |*.json|Minden fájl |*.*",
+                    Filter = "minden támogatott fájl |*.csv;*.json|szöveges adatok |*.csv|JSON export fájl |*.json|" +
+                             "Minden fájl |*.*",
                     Title = "Mentés"
                 };
                 fileDialog.FileOk += (_, _) =>
                 {
-                    controller!.SaveToJson(fileDialog.OpenFile());
-                    MessageBox.Show("Fájl elmentve!");
+                    var isFileJson = fileDialog.SafeFileName.EndsWith(".json");
+                    if(isFileJson) controller!.SaveToJson(fileDialog.OpenFile());
+                    else controller!.SaveToCsv(fileDialog.OpenFile());
+                    MessageBox.Show("Fájl elmentve!","Sikeres mentés!",MessageBoxButton.OK,MessageBoxImage.Information);
                 };
                 fileDialog.ShowDialog();
             };
             DeleteButton.Click += (_, _) =>
             {
-                var answer = MessageBox.Show("Biztosan törli ezt a sort?", "Törlés", MessageBoxButton.YesNo, MessageBoxImage.Warning,
+                var answer = MessageBox.Show("Biztosan törli ezt a sort?", "Törlés", MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning,
                     MessageBoxResult.No);
                 if (answer is MessageBoxResult.No) return;
                 if (Grid.SelectedItem is not Tester selected)
@@ -78,11 +83,17 @@ namespace Playtesting
                         MessageBoxImage.Information);
                     controller!.SetBindingFor(Grid);
                 }
-                else MessageBox.Show("Valamilyen hiba történt a törlés során.", "Hiba!", MessageBoxButton.OK, MessageBoxImage.Error);
+                else MessageBox.Show("Valamilyen hiba történt a törlés során.", "Hiba!", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
             };
             NewTesterButton.Click += (_, _) =>
             {
-                new NewTesterWindow(controller!).ShowDialog();
+                var newTesterWindow = new NewTesterWindow(controller!);
+                newTesterWindow.Closed += (_, _) =>
+                {
+                    controller!.SetBindingFor(Grid);
+                };
+                newTesterWindow.ShowDialog();
             };
         }
     }

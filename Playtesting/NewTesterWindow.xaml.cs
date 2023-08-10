@@ -42,9 +42,13 @@ namespace Playtesting
                 if (visuals is null) return;
                 var musicScore = GetNumberInRange(MusicField.Text);
                 if (musicScore is null) return;
-                var newTester = new Tester(name,(byte)age, version,(byte) playtime, (byte) hwTier, (byte) perf, (byte) gameplay, (byte) story, (byte) visuals,
+                var newTester = new Tester(name,(byte)age, version,(byte) playtime, (byte) hwTier, 
+                    (byte) perf, (byte) gameplay, (byte) story, (byte) visuals,
                     (byte) musicScore);
                 controller.AddTester(newTester);
+                MessageBox.Show("Sor hozzáadva!", "Sikeres hozzáadás!", MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+                Close();
             };
         }
 
@@ -58,13 +62,14 @@ namespace Playtesting
         {
             try
             {
-                var number = Convert.ToByte(AgeField.Text);
-                if (number < min || number > max) throw new InvalidOperationException();
+                var number = Convert.ToByte(str);
+                if (number < min || number > max) throw new InvalidOperationException(
+                    "A megadott érték nem felel meg a határértékeknek.");
                 return number;
             }
             catch (Exception e)
             {
-                ShowError(AgeField, e.Message);
+                ShowError(AgeField, e.ToString());
                 return null;
             }
         }

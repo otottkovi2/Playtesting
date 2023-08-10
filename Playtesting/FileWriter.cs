@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.Json;
 
 namespace Playtesting
@@ -17,8 +18,12 @@ namespace Playtesting
 
         public static void SaveToCsv(Stream stream, IEnumerable<Tester> testers)
         {
-            var allLines = testers.Select(t => t.ToString()).Aggregate((c, n) => c + "\n" + c);
-            var sw = new StreamWriter(stream);
+            var allLines = testers
+                .Select(t => $"{t.Name}, {t.Age}, {t.Version}, {t.Playtime}, {t.HwTier}, {t.PerformanceScore}," +
+                                               $" {t.GameplayScore}, {t.StoryScore}, {t.VisualsScore}, {t.MusicScore}")
+                .Aggregate((c, n) => c + "\n" + n);
+            var sw = new StreamWriter(stream,Encoding.UTF8);
+            sw.WriteLine("Név,Kor,Verzió,Játékidő (h),HW Tier,Teljesítmény,Játékmenet,Történet,Látvány,Zene");
             sw.Write(allLines);
             sw.Flush();
             sw.Close();

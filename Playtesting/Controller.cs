@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -31,7 +30,7 @@ namespace Playtesting
             var binding = new Binding("Testers")
             {
                 Mode = BindingMode.OneWay,
-                ValidationRules = { new ScoreRule(),new ExceptionValidationRule(),new NotifyDataErrorValidationRule()},
+                ValidationRules = { new ExceptionValidationRule(),new NotifyDataErrorValidationRule()},
                 Source = this
             };
             control.SetBinding(ItemsControl.ItemsSourceProperty, binding);
