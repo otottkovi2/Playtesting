@@ -5,12 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Playtesting"
         mc:Ignorable="d"
-        Title="NewTesterWindow" Height="600" Width="450">
+        Title="Tesztelő felvétel" Height="600" Width="450" ResizeMode="NoResize">
     <Window.Resources>
         <Style TargetType="TextBox">
             <Setter Property="HorizontalAlignment" Value="Right"></Setter>
             <Setter Property="Margin" Value="0,0,0,0"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="BorderBrush" Value="#4984F4"></Setter>
+            <Setter Property="Background" Value="#D1DDF4"></Setter>
+            <Setter Property="Foreground" Value="#0C1D3F"></Setter>
+        </Style>
+        <Style TargetType="Window">
+            <Setter Property="Background" Value="#E9F1FF"></Setter>
+            <Setter Property="Foreground" Value="#4984F4"></Setter>
+            <Setter Property="MinWidth" Value="450"></Setter>
+            <Setter Property="MinHeight" Value="400"></Setter>
+            <Setter Property="ShowActivated" Value="True"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#D1DDF4"></Setter>
+            <Setter Property="Foreground" Value="#0C1D3F"></Setter>
+            <Setter Property="BorderBrush" Value="#0C1D3F"></Setter>
+            <Setter Property="BorderThickness" Value="2"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
+            <Setter Property="IsDefault" Value="True"></Setter>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="#0C1D3F"></Setter>
         </Style>
     </Window.Resources>
     <Grid>

@@ -5,7 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Playtesting"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1000">
+        Title="Playtest adat elemző" Height="600" Width="1000">
+    <Window.Resources>
+        <Style TargetType="Window">
+            <Setter Property="Background" Value="#E9F1FF"></Setter>
+            <Setter Property="Foreground" Value="#4984F4"></Setter>
+            <Setter Property="Padding" Value="10"></Setter>
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="#EEF4FF"></Setter>
+            <Setter Property="Foreground" Value="#0C1D3F"></Setter>
+            <Setter Property="AlternatingRowBackground" Value="#ADC5F4"></Setter>
+            <Setter Property="GridLinesVisibility" Value="None"></Setter>
+            <Setter Property="HorizontalScrollBarVisibility" Value="Auto"></Setter>
+            <Setter Property="MinColumnWidth" Value="50"></Setter>
+            <Setter Property="MinRowHeight" Value="20"></Setter>
+            <Setter Property="MinHeight" Value="70"></Setter>
+            <Setter Property="MinWidth" Value="500"></Setter>
+            <Setter Property="RowBackground" Value="#D1DDF4"></Setter>
+            <Setter Property="RowHeaderWidth" Value="0"></Setter>
+            <Setter Property="UseLayoutRounding" Value="True"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#D1DDF4"></Setter>
+            <Setter Property="Foreground" Value="#0C1D3F"></Setter>
+            <Setter Property="BorderBrush" Value="#0C1D3F"></Setter>
+            <Setter Property="FontWeight" Value="Medium"></Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <DataGrid Margin="10,10,180,10" x:Name="Grid" ItemsSource="{Binding}" AutoGenerateColumns="false"
                   CanUserAddRows="True">
@@ -22,11 +49,11 @@
                 <DataGridTextColumn Header="Zene" Binding="{Binding MusicScore}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Betöltés" HorizontalAlignment="Right" Margin="0,154,43,0" VerticalAlignment="Top" Width="86" x:Name="LoadButton"/>
-        <Button Content="Mentés" HorizontalAlignment="Right" Margin="0,272,43,0" VerticalAlignment="Top" Width="86" x:Name="SaveButton" IsEnabled="false"/>
+        <Button Content="Betöltés" HorizontalAlignment="Right" Margin="0,154,43,0" VerticalAlignment="Top" Width="86" x:Name="LoadButton" ToolTip="Új fájl betöltése."/>
+        <Button Content="Mentés" HorizontalAlignment="Right" Margin="0,272,43,0" VerticalAlignment="Top" Width="86" x:Name="SaveButton" IsEnabled="false" ToolTip="Módosított adatok mentése."/>
         <Button Content="Sor törlése" Width="86" Margin="0,341,43,0" HorizontalAlignment="Right" VerticalAlignment="Top"
-                IsEnabled="False" x:Name="DeleteButton">
+                IsEnabled="False" x:Name="DeleteButton" ToolTip="Kijelölt sor törlése.">
         </Button>
-        <Button Content="Új sor..." Margin="0,391,43,0" Width="86" VerticalAlignment="Top" HorizontalAlignment="Right" Height="21" x:Name="NewTesterButton" IsEnabled="False"></Button>
+        <Button Content="Új sor..." Margin="0,391,43,0" Width="86" VerticalAlignment="Top" HorizontalAlignment="Right" Height="21" x:Name="NewTesterButton" IsEnabled="False" ToolTip="Új tesztadatok hozzáadása"></Button>
     </Grid>
 </Window>
